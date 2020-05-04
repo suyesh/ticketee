@@ -12,5 +12,11 @@ RSpec.feature 'Users can create new projects' do
     click_button 'Create Project'
 
     expect(page).to have_content 'Project has been created'
+
+    project = Project.find_by(name: 'Visual Studio Code')
+    expect(page.current_url).to eq project_url(project)
+
+    title = "#{project.name} - Projects - Ticketee"
+    expect(page).to have_title title
   end
 end
